@@ -14,7 +14,7 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 	Context context;
 	ArrayList<Note> notes;
 	int resource;
-	ImageView iv1, iv2, iv3, iv4, iv5;
+	ImageView[] imageViews;
 
 	public RevisionNotesArrayAdapter(Context context, int resource, ArrayList<Note> notes) {
 		super(context, resource, notes);
@@ -34,13 +34,23 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 
 		Note note = notes.get(position);
 
+		String description = note.getNoteContent();
+
+		int stars = note.getStars();
+
+		imageViews = new ImageView[5];
+
+		imageViews[0] = rowView.findViewById(R.id.imageView1star);
+		imageViews[1] = rowView.findViewById(R.id.imageView2star);
+		imageViews[2] = rowView.findViewById(R.id.imageView3star);
+		imageViews[3] = rowView.findViewById(R.id.imageView4star);
+		imageViews[4] = rowView.findViewById(R.id.imageView5star);
+
+		TextView textView = rowView.findViewById(R.id.editTextNote);
+
 		//Check if the property for starts >= 5, if so, "light" up the stars
-		if (/*stars >= 5*/) {
-			iv5.setImageResource(android.R.drawable.btn_star_big_on);
-			iv4.setImageResource(android.R.drawable.btn_star_big_on);
-			iv3.setImageResource(android.R.drawable.btn_star_big_on);
-			iv2.setImageResource(android.R.drawable.btn_star_big_on);
-			iv1.setImageResource(android.R.drawable.btn_star_big_on);
+		for(int i = 0; i < stars; i++){
+			imageViews[i].setImageResource(android.R.drawable.btn_star_big_on);
 		}
 
 		return rowView;
