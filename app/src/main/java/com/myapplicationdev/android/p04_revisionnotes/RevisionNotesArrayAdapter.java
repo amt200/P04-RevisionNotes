@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 
 public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
@@ -21,6 +23,11 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 		this.context = context;
 		this.notes = notes;
 		this.resource = resource;
+	}
+
+	@Override
+	public void add(@Nullable Note object) {
+		notes.add(object);
 	}
 
 	@Override
@@ -46,12 +53,14 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 		imageViews[3] = rowView.findViewById(R.id.imageView4star);
 		imageViews[4] = rowView.findViewById(R.id.imageView5star);
 
-		TextView textView = rowView.findViewById(R.id.editTextNote);
+		TextView textView = rowView.findViewById(R.id.textViewNote);
 
 		//Check if the property for starts >= 5, if so, "light" up the stars
 		for(int i = 0; i < stars; i++){
 			imageViews[i].setImageResource(android.R.drawable.btn_star_big_on);
 		}
+
+		textView.setText(description);
 
 		return rowView;
 	}
